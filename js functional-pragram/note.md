@@ -49,9 +49,188 @@ lodash.js函数式编程库
 
 3.函数组合
 
+    纯函数以及如何把它柯里化写出来的洋葱代码h(g(f(x))),为了解析函数嵌套的问题,需要函数组合
+
+    const compose = (f,g) => (x => f(g(x)));
+    var first = arr => arr[0];
+    var reverse = arr => arr.reverse();
+    var last = compose(first,reverse)
+    last([1,2,3,4,5])
+
 4.point free
 
+    把一些对象自带的方法转化成纯函数,不要命令转瞬即逝的中间变量
+
+    这个函数,使用了str作为我们的中间变量,但这个中间变量除了让代码边长一点以外是毫无意义的
+    const f = str => str.toUpperCase().split('')
+
+    例如 var toUpperCase = word => word.toUpperCase();
+        var split = x => (str => split(x))
+
+        本来就是js支持的方法,没有必要再写一个中间变量,想要了利用上面两个函数,可以组合修改成以下:
+
+            var f = compose(split(' '), toUpperCase);
+            f("abcd efgh")
+
+
 5.声明式与命令式代码
+    命令式代码是,通过编写一条又一条指令去让计算机执行一些动作,这其中一般都会涉及到很多繁杂的细节.而声明式要优雅很多,通过表达式的方式来声明我们想干什么,而不是通过一步一步的指示.
+
+    //命令式
+
+    let CEOs = []
+    for(var i = 0;i<companies.length;i++){
+        CEOs.push(companies[i].CEO)
+    }
+
+    //声明式
+
+    let CEOs = companies.map(c=>c.CEO);
+
+    优缺点
+
+    函数式编程优缺点
+
+        一个明显的好处就是这种声明式的代码,对于无副作用的纯函数,我们完全可以不考虑函数内部是如何实现的,专注编写业务代码.优化代码时,暮光之需要集中在这些稳定坚固的函数内部即可.
+
+        相反,不纯的函数式代码会产生副作用或者依赖系统环境,使用它们的时候总是要考虑这些不干净的副作用.
 
 6.惰性求值
+
+    在指令式语言中以下代码会按顺序执行,由于每个函数都有可能改动或者依赖于其外部的状态,因此必须顺序执行
+
+    function somewhatLongOpention1(){somewhatLongOperation}
+
+    例如
+
+        function a(){
+            if(true){
+                console.log(123);
+            }else{
+                console.log(456)
+            }
+        }
+        a();
+        a();
+
+        以上虽然是一样的,但是每一次都需要重新判断,况且如果逻辑很复杂,会有性能问题.
+
+        改造如下:
+     
+            function a(){
+                if(true){
+                a = function(){
+                    console.log(123)
+                }
+            }else{
+                console.log(456)
+            }
+        }
+        a();
+        a();
+
+        第一次执行if..else,注意,这里不输出,a被重写
+
+        第二次知道了,不用再判断,输出123
+
+    实际的应用场景:
+
+        ajax
+
+        代码如下:
+
+        function ajaxFunction() {
+    var xmlHttp;
+
+    try {
+        // Firefox, Opera 8.0+, Safari
+        xmlHttp = new XMLHttpRequest();
+    }
+    catch (e) {
+
+        // Internet Explorer
+        try {
+            xmlHttp = new ActiveXObject("Msxml2.XMLHTTP");
+        }
+        catch (e) {
+
+            try {
+                xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            catch (e) {
+                alert("您的浏览器不支持AJAX！");
+                return false;
+            }
+        }
+    }
+}
+
+
+//改造如下
+
+
+function ajaxFunction() {
+    var xmlHttp;
+
+    try {
+        // Firefox, Opera 8.0+, Safari
+        xmlHttp = new XMLHttpRequest();
+        //也是只要判断一次,就不需要再判断了
+        ajaxFunction = function(){
+            return new XMLHttpRequest()
+        }
+    }
+    catch (e) {
+
+        // Internet Explorer
+        try {
+            xmlHttp = new ActiveXObject("Msxml2.XMLHTTP");
+        }
+        catch (e) {
+
+            try {
+                xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            catch (e) {
+                alert("您的浏览器不支持AJAX！");
+                return false;
+            }
+        }
+    }
+}
+
+
+
+
+更加专业的术语
+
+1.高阶函数
+
+函数当参数,把传入的函数做一个封装,然后返回这个封装函数,达到更高程度的抽象
+
+//命令式
+
+var add = function(a,b){
+    return a+b
+}
+
+function math(func,array){
+    return func(array[0],array[1]);
+}
+
+math(add,[1,2]);
+
+
+
+2.尾调用优化
+
+3.闭包
+
+4.容器,Function
+
+5.错误处理,Einer,AP
+
+6.IO
+
+7.Monad
 
