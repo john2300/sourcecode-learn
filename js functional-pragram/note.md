@@ -288,3 +288,57 @@ math(add,[1,2]);
 
 7.Monad
 
+
+
+
+流行的几大函数式编程库
+
+    RxJS
+
+       function Reactive Programming FRP,函数响应式编程 
+
+       所有的外部输入(用户输入,网络请求等等)都被视作一种事件流:
+
+        用户点击了按钮-->网络请求成功-->用户键盘输入-->某个定时事件发生-->这种事件流特别适合处理游戏,上上下下,例如,下面这段代码监听点击事件,每两次点击事件产生一次事件响应:
+
+            var clicks = Rx.Observable
+                .fromEvent(document,'click')
+                .bufferCount(2)
+                .subscribe(x=>console.log(x));//打印出前两次点击事件
+        
+        Angular在用这个技术
+
+    cycleJs
+
+        是一个基于rxjs的框架,它是一个彻底的FRP理念的框架,和react一样支持virtual DOM,JSX语法,但现在似乎还没有看到大型的应用经验
+
+        本质上讲,它就是在Rx.js的基础上加入了对virtual DOM,容器和组件的支持
+
+    lodash.js
+
+        是一个具有一致接口,模块化.高性能等特性的js工具库,是underscore.js的fork,其最初目标也是"一致的跨浏览器行为,,,并改善性能"
+
+        lodash采用延迟计算,意味着我们链式方法在显式或者隐式的value()调用之前是不会执行的,因此lodash可以进行shortcut(捷径)fusion(融合)这样的优化,通过合并链式大大降低迭代的次数,从而大大提升其执行性能
+
+
+    underscoerjs
+
+        是一个js工具库.它提供了一整套函数式编程的实用功能,但是没有扩展任何js内置对象.解决了这个问题:如果我面对一个空白的HTML,并希望立即开始工作,我需要什么?弥补了jquery没有实现的功能,同时又是Backbone必不可少的部分
+
+        函数式编程最佳入门库
+
+
+    ramdajs
+
+
+
+函数式编程实际应用场景
+
+    易调试,热部署,并发
+
+    单元测试
+
+    总结与补充
+    
+
+
