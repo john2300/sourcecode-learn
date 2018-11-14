@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>字典</title>
+</head>
+
+<body>
+  <script>
+    //Dictionary类的基础类是Array类,不是Object类
+    function Dictionary(){
+      this.datastore = new Array();
+      this.add = add;
+
+      this.find = find;
+      this.count = count;
+      this.clear = clear;
+      this.remove = remove;
+      this.showAll = showAll
+    }
+    
+    function add(key,value){
+      this.datastore[key] = value;
+    }
+
+    function find(key){
+      return this.datastore[key];
+    }
+
+    function remove(key){
+      //delete可以把见和值都删除
+      delete this.datastore[key]
+    }
+
+    function showAll(){
+      //找到所有的key值
+      var datakeys = Object.keys(this.datastore);
+      for(var keys in datakeys){
+        console.log(datakeys[keys]+"-->"+this.datastore[datakeys[keys]]);
+
+      }
+    }
+
+    function count(){
+      return Object.keys(this.datastore).lenth
+    }
+
+    function clear(){
+      var datakeys = Object.keys(this.datastore);
+      for(var keys in datakeys){
+        delete this.datastore[datakeys[keys]]
+      }
+    }
+  </script>
+</body>
+
+</html>

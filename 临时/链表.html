@@ -17,15 +17,50 @@
     //链表的操作
     function LList(){
       this.head = new Node("head");
-      
+      this.find = find;
+      this.insert = insert;
+      this.display = display
     }
     
     
     function find(item){
+      //查找从头节点开始
+      var currNode = this.head;
+      //如果当前节点不等于查找的元素
+      while(currNode.element!=item){
+        // 当前元素等于后继
+        currNode = currNode.next
+      }
+      return currNode;
+    }
+
+    function insert(newElement,item){
+      var newNode = new Node(newElement);
+      //找到插入节点的位置
+      var currNode = this.find(item);
+      //插入节点的后继指向当前节点的后继
+      newNode.next = currNode.next;
+      //并且当前节点的后继等于新的节点
+      currNode.next = newNode;
 
     }
 
-    function insert(newElement)
+    function display(){
+      //从头节点开始接入
+      var currNode = this.head;
+      //当前节点不等于空,一直遍历下去
+      while(currNode.next!=null){
+        console.log(currNode.next.element);
+        //currNode指向currNode的后继????
+        currNode = currNode.next
+      }
+    }
+
+    var cities = new LList();
+    cities.insert("first","head");
+    cities.insert("second","first");
+    cities.insert("third","second");
+    cities.display();
   </script>
 </body>
 
