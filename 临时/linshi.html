@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>js内存堆和栈</title>
+</head>
+
+<body>
+  <script>
+    //栈
+    function foo(){
+      var a = 5,
+        b = 6,
+        c = a + b
+    }
+    foo()
+    /*
+      先遇到a,把a压倒栈里面,然后是b和c,对函数里面的局部变量不断地压栈,内存向低位增长,栈空间大小8M(可使用ulimit -a查看),假设一个变量用了8B,一个函数里面定义了10个变量,最多递归8M/(8B*10)=80万次就会发生栈溢出stackoverflow.ulimit -a 可查
+
+      这个递归80万次,就是重复调用foo啊,这个在内存里存在啊,递归调用怎么还会占用空间?????????????????????????
+
+      大致过程是:
+
+        内存地址address       存放值
+
+          rbp-32              11
+
+          rbp-24              6
+
+          rbp-16              5
+
+          rbp-8               ?
+
+          rbp                 ?(foo函数入口地址)
+    */
+
+
+    //堆
+    var object = {
+      id:5
+    };
+    var arr = [1,2,3,,4,5];
+    var n = 1000;
+
+    //人的书写习惯是从左到右,阅读习惯是左边为高位,右边为低位.如0xAE A是高位E是低位.十六进制是为了内存对齐
+
+    /*
+      过程
+
+        *object       |     堆从内存低位向高位增长,可用空间要比栈大很多,效率比栈低,存的基本是值 
+                      |
+        *arr              
+--------------------------------------
+        n             ^      栈正好相反,存的基本是地址
+                      |
+        arr           |
+                      |
+        object        |
+    */
+  </script>
+</body>
+
+</html>

@@ -157,5 +157,22 @@
 
 
 js内存堆和栈
-            
+
+    内存栈:函数执行的时候会把局部变量压到一个栈里面
+
+    内存堆:内存里的堆是指存放new出来动态创建变量的地方
+
+
+    示例代码
+
         
+
+            
+    var a = {n:1};
+    var b = a;
+    a.x = a = {n:2};
+    console.log(a);//{n:2}
+    console.log(a.x);//undefined
+    console.log(b.x);//{n:2}
+
+
