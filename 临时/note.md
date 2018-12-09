@@ -176,3 +176,18 @@ js内存堆和栈
     console.log(b.x);//{n:2}
 
 
+
+
+如果想隐藏子组件的滚动条，需要在【父组件】的css样式中添加下面的样式，注意在子组件中添加是没有效果的。
+
+::-webkit-scrollbar{    
+
+    width: 0;    
+
+    height: 0;    
+
+    color: transparent;    
+
+    display: none;
+
+}
