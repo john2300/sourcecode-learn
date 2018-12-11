@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // let a = [10,35,26,8,20,1000,23,87]
+        // for(let i=0;i<a.length;i++){
+        //     for(let j=0;j<a.length;j++){
+        //         if(a[j]>a[j+1]){
+        //             let tmp = a[j]
+        //             a[j] = a[j+1]
+        //             a[j+1] = tmp
+        //         }
+        //     }
+        // }
+        // console.log(a)
+        // let a = '123455'
+        // console.log(a)
+        let a = new String()
+        // console.log(a)
+        let cd = new Array()
+        console.log(Array.prototype.forEach)
+        String.prototype.forEach = Array.prototype.forEach
+        console.log(a)
+        // console.log(Object.prototype.toString.call('1233'))
+        function string111(s){
+            return s.split('')
+        }
+        console.log(string111('1233444'))
+
+        let b = '12334445'
+        // console.log(b.length)
+        // for(let i=0;i<b.length;i++){
+        //     console.log(b[i])
+        //     // console.log(b[1])
+        // }
+        let arr = []
+        for(let i of b){
+            arr.push(i)
+        }
+        console.log(arr)
+
+        function arrFormat(string){
+            let arr = []
+            for(let i of string){
+                arr.push(i)
+            }
+            return arr
+        }
+        
+    </script>
+</body>
+</html>
+
+
