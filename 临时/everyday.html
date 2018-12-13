@@ -1,60 +1,126 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
+
 <body>
     <script>
-        // let a = [10,35,26,8,20,1000,23,87]
-        // for(let i=0;i<a.length;i++){
-        //     for(let j=0;j<a.length;j++){
-        //         if(a[j]>a[j+1]){
-        //             let tmp = a[j]
-        //             a[j] = a[j+1]
-        //             a[j+1] = tmp
-        //         }
+        // // let a = [10,35,26,8,20,1000,23,87]
+        // // for(let i=0;i<a.length;i++){
+        // //     for(let j=0;j<a.length;j++){
+        // //         if(a[j]>a[j+1]){
+        // //             let tmp = a[j]
+        // //             a[j] = a[j+1]
+        // //             a[j+1] = tmp
+        // //         }
+        // //     }
+        // // }
+        // // console.log(a)
+        // // let a = '123455'
+        // // console.log(a)
+        // let a = new String()
+        // // console.log(a)
+        // let cd = new Array()
+        // console.log(Array.prototype.forEach)
+        // String.prototype.forEach = Array.prototype.forEach
+        // console.log(a)
+        // // console.log(Object.prototype.toString.call('1233'))
+        // function string111(s){
+        //     return s.split('')
+        // }
+        // console.log(string111('1233444'))
+
+        // let b = '12334445'
+        // // console.log(b.length)
+        // // for(let i=0;i<b.length;i++){
+        // //     console.log(b[i])
+        // //     // console.log(b[1])
+        // // }
+        // let arr = []
+        // for(let i of b){
+        //     arr.push(i)
+        // }
+        // console.log(arr)
+
+        // function arrFormat(string){
+        //     let arr = []
+        //     for(let i of string){
+        //         arr.push(i)
         //     }
+        //     return arr
         // }
-        // console.log(a)
-        // let a = '123455'
-        // console.log(a)
-        let a = new String()
-        // console.log(a)
-        let cd = new Array()
-        console.log(Array.prototype.forEach)
-        String.prototype.forEach = Array.prototype.forEach
-        console.log(a)
-        // console.log(Object.prototype.toString.call('1233'))
-        function string111(s){
-            return s.split('')
-        }
-        console.log(string111('1233444'))
+        let arr1 = [
+            1, 2, 3, 788, 324, 323, [
+                8888888, 404434, 21, 0404, [
+                    [
+                        23, 79, 60, 34, 97, 006, 3748, [
+                            93939, 1, 8, 928, 0302, 2002, 111, [
+                                1828, [18839], [100202, 030, [
+                                    234, 999, [233]
+                                ], 202, 1883,]
+                            ]
+                        ], 237
+                    ], 2033, 12, 45, 23
+                ], 2304
+            ], 2
+        ]
 
-        let b = '12334445'
-        // console.log(b.length)
-        // for(let i=0;i<b.length;i++){
-        //     console.log(b[i])
-        //     // console.log(b[1])
+        // console.log(JSON.stringify(arr))
+        // console.log(arr)
+        // console.time('timer')
+        // let b = JSON.stringify(arr1)
+        // // console.log(b)
+        // console.log(b.indexOf(323))
+        // console.timeEnd('timer')
+        // console.log('-----------')
+        // // console.log(arr1.indexOf(8888888))
+
+        // function find(target) {
+        //     return target == 788
         // }
-        let arr = []
-        for(let i of b){
-            arr.push(i)
-        }
-        console.log(arr)
+        // console.time('timer')
+        // let isEist = arr1.some(find)
+        // console.log(isEist)
+        // console.timeEnd('timer')
+        // console.log('----------')
 
-        function arrFormat(string){
-            let arr = []
-            for(let i of string){
-                arr.push(i)
+        // console.time('timer')
+        // arr1.forEach((r, index) => {
+        //     if (r == 323) {
+        //         console.log(index)
+        //     }
+        // })
+        // console.timeEnd('timer')
+        // console.log('-----')
+
+
+        function findOffset(arr, val, position) {
+            var res = '';
+            function _find(arr, val, position) {
+                var temp = '';
+                arr.forEach((item, index) => {
+                    temp = position ? position + ',' + index : index;
+                    if (item === val) {
+                        res = temp;
+                        return;
+                    } else if (item instanceof Array) {
+                        temp = _find(item, val, temp);
+                    }
+                })
             }
-            return arr
+            _find(arr, val, position);
+            return res;
         }
-        
+        console.time('timer')
+        console.log(findOffset(arr1, 323))
+        console.timeEnd('timer')
+        console.log('-----')
     </script>
 </body>
+
 </html>
-
-
