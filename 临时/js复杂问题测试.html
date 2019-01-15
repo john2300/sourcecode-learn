@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+</head>
+
+<body>
+	<!-- src空是,script里面的代码是不会执行的 -->
+	<!-- <script src=""> -->
+	<script>
+		// let arr = [1,2];
+		// arr.str = 'string';
+		// arr[2] = '3';
+		// arr['3'] = 4;
+		// console.log(arr);//(4) [1, 2, "3", 4, str: "string"]		
+		// console.log(arr.length);//4
+		// arr.forEach((item,index)=>{
+		// 	console.log('index:' + index + ',' + 'item:' + item);
+		// 	//index:0,item:1;index:1,item:2;index:2,item:3;index:3,item:4
+		// });
+		// let a = 'foo';
+		// a.join; // undefined
+		// a.map; // undefined
+
+		// var c = Array.prototype.join.call(a, "-");
+		// var d = Array.prototype.map.call(a, function (v) {
+		// 	console.log(v)
+		// 	return v.toUpperCase() + ".";
+		// }).join("");
+
+		// console.log(c);// "f-o-o"
+		// console.log(d);// "F.O.O."
+
+		// let a = 123;
+		// console.log(a.toString());
+		var a = new String("abc");
+
+		typeof a; // 是"object"，不是"String"
+		console.log(a);
+		let b = 'abc';
+		console.log(b);
+		console.log(a instanceof String);
+		let c = new Boolean(false);
+		console.log(c);
+		// a instanceof String; // true
+		console.log(Object.prototype.toString.call(a));
+		// Object.prototype.toString.call(a); // "[object String]"
+	</script>
+</body>
+
+</html>
