@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    function Parent(name){
+      this.name = name;
+    }  
+    function Child(){
+
+    }
+    Child.prototype  = new Parent();
+    // Child.prototype
+    let child = new Child('你好');
+    console.log(child);
+  </script>
+</body>
+</html>

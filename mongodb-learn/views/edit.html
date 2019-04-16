@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h2>编辑</h2>
+    <form action="/doEdit" method="post">
+        <input type="hidden" name="id" value="{{@list._id}}">
+        用户名：<input type="text" name="username" value="{{list.username}}">
+        <br>
+        <br>
+
+        性  别：<input type="text" name="sex" value="{{list.sex}}">
+        <br>
+        <br>
+        年  龄：<input type="text" name="age" value="{{list.age}}">
+
+        <br>
+        <br>
+        <input type="submit" value="提交">
+    </form>
+</body>
+</html>
