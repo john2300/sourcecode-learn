@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body></body>
+  <script>
+    /*
+    首先 requestAnimationFrame 自带函数节流功能，基本可以保证在 16.6 毫秒内只执行一次（不掉帧的情况下），并且该函数的延时效果是精确的，没有其他定时器时间不准的问题，当然你也可以通过该函数来实现 setTimeout。
+    */
+    //setInterval修正
+    // function setInterval(callback, interval) {
+    //   let timer;
+    //   const now = Date.now;
+    //   let startTime = now();
+    //   let endTime = startTime;
+    //   const loop = () => {
+    //     timer = window.requestAnimationFrame(loop);
+    //     endTime = now();
+    //     if (endTime - startTime >= interval) {
+    //       startTime = endTime = now();
+    //       callback(timer);
+    //     }
+    //   };
+    //   timer = window.requestAnimationFrame(loop);
+    //   return timer;
+    // }
+
+    // let a = 0;
+    // setInterval(timer => {
+    //   console.log(1);
+    //   a++;
+    //   if (a === 3) cancelAnimationFrame(timer);
+    // }, 1000);
+
+    //setTimeout修真
+    function setTimeout(callback,interval){
+      let now = Date.now;
+      let startTime = now();
+      const loop = () => {
+        let timer = window.requestAnimationFrame(loop);
+        let endTime = now();
+        if(endTime - startTime >= interval){
+          console.log('时间到了');
+          window.cancelAnimationFrame(timer)
+          callback();
+        }
+      }
+      loop();
+    }
+
+    setTimeout(timer=>{
+      console.log('122')
+    },2000);
+  </script>
+</html>
