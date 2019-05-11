@@ -113,3 +113,12 @@ function diff(oldChildren, newChildren) {
     }
     return patches;
 }
+
+/**
+ * 
+ * 原来的key:a,b,c,d 现在的key:d,a,b,c
+ * 补丁包的长度为6,浪费性能,因为只是把d变换了一个位置,就有6个长度的补丁包
+ * 
+ *
+ *  
+ * */

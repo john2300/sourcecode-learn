@@ -95,6 +95,7 @@ function diff(oldChildren, newChildren) {
             newIndex++;
         } else if (oldKey != newKey) {
             let nextOldKey = (oldChildren[oldIndex + 1] || {}).key;
+            //让现在的节点与原来节点的下一个节点比较,解决节点数量不变,但是顺序变化的带来的性能问题 
             if (nextOldKey == newKey) {
                 remove(newIndex);
                 oldChildren.splice(oldIndex, 1);
