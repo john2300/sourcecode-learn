@@ -1,3 +1,4 @@
+//兼容处理
 import 'babel-polyfill';
 import {takeEvery,all,call,put,take} from 'redux-saga/effects';
 import * as types from './store/action-types';

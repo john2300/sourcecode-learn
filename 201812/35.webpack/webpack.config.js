@@ -30,7 +30,9 @@ module.exports = {
                 use: {
                     loader: 'html-layout-loader',
                     options: {
+                      //
                         layout: path.join(__dirname, 'src', 'layout.html'),
+                        //占位符
                         placeholder: '{{__content__}}'
                     }
                 }

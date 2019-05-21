@@ -2,12 +2,14 @@ const path = require('path');
 const fs = require('fs');
 const loaderUtils = require('loader-utils');
 const defaultOptions = {
+  //占位符
     placeholder: '{{__content__}}',
     decorator: 'layout'
 }
 module.exports = function (source) {
     let callback = this.async();
     this.cacheable && this.cacheable();
+    //loaderUtils.getOptions(this)拿到webpack.config.js里的rule>loader: 'html-layout-loader',下面的options  
     const options = Object.assign(loaderUtils.getOptions(this), defaultOptions);
     const { placeholder, decorator, layout } = options;
 

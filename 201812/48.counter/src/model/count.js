@@ -3,9 +3,10 @@ import key from 'keymaster';
 let delay = ms => new Promise((resolve, reject) => {
     setTimeout(() => resolve('ok'), ms);
 });
+//整个model需要合并,类似于redux里的reducer,在index.js里合并,model是数据状态
 export default {
     namespace: 'count',//命名空间,这个字符串决定了此应用在最终状态中的key
-    state: {
+    state: {//初始值
         record: 0,
         current: 0
     },
@@ -23,6 +24,7 @@ export default {
         }
     },
     //在整 个应用中，只有reducer才能改变 状态 ，其它地方都不可以
+    //处理器
     reducers: {
         //这个就是一个reducer函数，state 就是状态 action就是动作
         //reducer是一个纯函数,不能有任何副作用
