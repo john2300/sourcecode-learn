@@ -1,0 +1,12 @@
+body{
+  background: yellow;
+}
+body {
+  background: red;
+  /* transform: rotate(45deg); */
+}
+div{
+  width: 300px;
+  height: 300px;
+  background: url(http://www.baidu.com/7d7b2fb9b10adc0bcbf8dc5e7f6934ba.png);
+}

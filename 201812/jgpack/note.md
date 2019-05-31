@@ -33,3 +33,78 @@ emit
 done
 
 ###编写webpack
+
+
+
+
+
+
+
+npm link 把该文件链接到全局目录下
+
+
+/usr/bin/jgpack -> /usr/lib/node_modules/jgpack/bin/jgpack.js
+/usr/lib/node_modules/jgpack -> /home/john/Desktop/sourcecode-learn/201812/jgpack
+
+
+
+必要模块
+
+tapable:处理事件
+
+esprima:解析语法树
+
+escodegen:生成代码
+
+estraverse:遍历语法树
+
+ejscompiler
+
+
+
+
+
+
+
+
+
+
+
+webpack语法树网站:astexplorer.net
+
+let a2 = require('./a2');
+module.exports = a2;
+
+以上这段代码,主要查看依赖模块在语法树的哪一句里面"
+
+  body:[
+    //变量声明
+    VariableDeclaration{
+      ...
+      declarations:[
+        VaribleDeclarator{
+          ...
+          //调用表达式
+          init:CallExpression{
+            ...
+            //调用者requirede的信息
+            callee:Identifiler{
+              ...
+              name:"require"
+            }
+            arguments:[
+              //文本
+              Literal{
+                ...
+                value:"./a2"
+                raw:"'./a2'"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+
+
+  在没加入打包模板文件之前,打包后的文件是依赖什么模板的?解决了,之前可能是webpack编译出来的
