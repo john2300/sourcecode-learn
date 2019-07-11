@@ -78,7 +78,27 @@ tsconfig.json不要在网上随便找个就帖进来
 快速检查dist文件夹编译出的文件是否正确,新建一个index.html,引入dist里的编译文件
 
 
-vue-cli 有个很友好的提示工具
+vue-cli 有个很友好的提示工具：friendly-errors-webpack-plugin
+
+插件：webpack-build-notifier，弹出窗口成功编译，意义不大
+
+
+
+遇到问题,组件没办法显示出来,异步组件是在编译后会是一个promise,也就是说在dist文件夹里的app.js应该有个promise类型的东西,并且异步组件需要在then里执行,但是app.js里的异步组件还是同步的,并没有then.看看awsome-typescript-loader有没有解决的办法,这个比较难,换成babel-loader
+
+
+本地异步请求包的插件:react-hooks-fetch,如果没有太多状态的变化可以使用这个
+
+这个.babelrc和在webpack.config.js里配置有什么区别
+
+出现错误,因为impSupport for the experimental syntax 'dynamicImport' isn't currently enabled 
+16 | const Home = lazy(() => {
+17 |   import(/*webpackChunkName:"home" */ "../components/home")
+   |   ^
+18 | })
+原因无法动态引入,就是无法异步加载这个模块,dynamicImport这个不是包,去babel官网可以搜索到@babel/plugin-syntax-dynamic-import这个包,这个才是需要安装的包
+
+mobx-react-lite:专门为hooks设计的状态管理库
 
 摘抄网上的资料:
 

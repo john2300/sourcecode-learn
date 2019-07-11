@@ -32,7 +32,7 @@ const webpackConfig = {
         test: /\.(js|jsx|ts|tsx)$/,
         exclude: /node_modules/,
         include: [resolve("src")],
-        loader: 'awesome-typescript-loader'
+        loader: 'babel-loader'
       }
     ]
   },

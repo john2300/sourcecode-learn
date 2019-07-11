@@ -1,1 +1,1 @@
-webpack-dev-server --mode development --open
+webpack-dev-server --mode development --open 'Google Chrome'

@@ -1,31 +1,31 @@
 // import { clearScreenDown } from "readline";
 
-interface Result {
-	title: string;
-}
+// interface Result {
+// 	title: string;
+// }
 
-interface IYdata {
-	data: string;
-	result: Result;
-}
+// interface IYdata {
+// 	data: string;
+// 	result: Result;
+// }
 
-class Test {
-  private data;
-  constructor(str:IYdata){
-    this.data = str.data;
-  }
-  log(){
-    console.log(this.data);
-  }
-}
-//v8的jit有优化和去优化的功能,说白了就是js是解释类的语言,边解释边执行,jit会把重复的代码缓存起来,避免再次解释,加快执行,如果之后的解释没有遇到缓存中的代码,会把缓存删除,此为去优化.之所有需要类型检查,是因为如果数据类型写错了,没有办法让v8的jit进行优化和去优化,无法加快编译速度
-const test = new Test({
-  result:{
-    title:"冲击月薪三万"
-  },
-  data:"京程一灯"
-});
-test.log();
+// class Test {
+//   private data;
+//   constructor(str:IYdata){
+//     this.data = str.data;
+//   }
+//   log(){
+//     console.log(this.data);
+//   }
+// }
+// //v8的jit有优化和去优化的功能,说白了就是js是解释类的语言,边解释边执行,jit会把重复的代码缓存起来,避免再次解释,加快执行,如果之后的解释没有遇到缓存中的代码,会把缓存删除,此为去优化.之所有需要类型检查,是因为如果数据类型写错了,没有办法让v8的jit进行优化和去优化,无法加快编译速度
+// const test = new Test({
+//   result:{
+//     title:"冲击月薪三万"
+//   },
+//   data:"京程一灯 更新"
+// });
+// test.log();
 
 
 /*
@@ -112,3 +112,12 @@ V8、JIT
 3.如何通过编译器的优化原理，如何提高 JavaScript 的执行效率？
 
 */
+
+
+import * as React from "react";
+import * as ReactDOM from "react-dom";
+
+import App from "./pages/app";
+
+ReactDOM.render(<App/>,document.getElementById('main'));
+
