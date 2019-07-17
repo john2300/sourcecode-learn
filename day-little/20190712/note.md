@@ -14,13 +14,45 @@ module.exports = function(source){
 
 @babel/parser
 这个分析代码为语法树
-@babel/traverse
+解析打印出来是这个:
 
+Node {
+  type: 'File',
+  start: 0,
+  end: 56,
+  loc:
+   SourceLocation {
+     start: Position { line: 1, column: 0 },
+     end: Position { line: 4, column: 0 } },
+  program:
+   Node {
+     type: 'Program',
+     start: 0,
+     end: 56,
+     loc: SourceLocation { start: [Object], end: [Object] },
+     sourceType: 'script',
+     interpreter: null,
+     body: [ [Object] ],
+     directives: [] },
+  comments: [] }
+
+
+
+
+
+
+
+
+@babel/traverse
+babel-traverse通过AST生成一个便于操作、转换的path对象，供我们的babel插件处理；
 
 @babel/types
-
+可以理解为 babel 版的 loadsh 库，它提供了很多和 AST 的 Node 节点相关的辅助函数
 
 @babel/core 包中的 transformFromAstSync
+
+
+
 
 
 
@@ -360,3 +392,16 @@ traverse(ast, {
 复制代码
 更多细节和源代码可以查看 github，同时本文对您有收获的话，希望能点个 star，非常感谢~
 
+
+
+
+
+
+babel的编译过程分为3步，解析（parse），转换（transform），生成（generate），对应的三个插件分别是Babylon、babel-traverse、babel-generator。
+babylon将源码转换为抽象语法树（AST）；babel-traverse通过AST生成一个便于操作、转换的path对象，供我们的babel插件处理；babel-generator读取AST并将其转换为代码和源码映射。
+
+-----???这里的Babylon和文章里的@babel/parser是同一类东西?no,官网看到的babylon 就是现在 @babel/parser
+
+Babel Traverse模块维护整个树状态，负责替换，删除和添加节点。
+
+通过 @babel/traverse 可以传入一个 AST 树和一些钩子函数，随后深度遍历传入的 AST 树，当遍历的节点和钩子函数的名字相同时，会执行对应的回调
