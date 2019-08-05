@@ -1,6 +1,6 @@
 body {padding: 0;margin: 0;font-family: sans-serif;background-color: #e0e0e0;}
 img {display: block;width: 100%;}
-a {display: inline-block;}
+a {display: block;}
 a:hover, a:focus {text-decoration: none;}
 /*头部样式*/
 .header {width: 100%;padding-left: 180px;position: fixed;top: 0;z-index: 99;}

@@ -15,11 +15,19 @@ class Header extends Component {
             <li><a href="/mine"><i className="fa fa-user"></i>个人中心</a></li>
             <li><a href="javascript:;"><i className="fa fa-bell"></i><span
               className="badge">20</span></a></li>
-            <li><a href="javascript:;"><i className="fa fa-sign-out"></i>退出</a></li>
+            <li>
+              <a style={{ cursor: 'pointer' }} onClick={()=>{this._onClick()}}>
+                <i className="fa fa-sign-out">
+                </i>退出</a>
+            </li>
           </ul>
         </nav>
       </div>
     );
+  }
+  _onClick(){
+    sessionStorage.removeItem('userData');
+    window.location.href = '/';
   }
 }
 export default Header;

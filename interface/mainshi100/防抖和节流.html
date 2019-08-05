@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- 第一种点击事件写法 -->
+  <!-- <button onclick="onClick()" id="btn">
+    +
+  </button>
+  <script>
+  function onClick(){
+    console.log(1);
+  }
+</script> -->
+
+  <!-- 防抖 触发高频事件后n秒内函数只会执行一次，如果n秒内高频事件再次被触发，则重新计算时间-->
+  <!-- <button id="btn">
+    +
+  </button>
+  <script>
+    let btn = document.getElementById('btn');
+
+    function debounce(fn, wait) {
+      let timer = null;
+      return function () {
+        clearTimeout(timer);
+        timer = setTimeout(function () {
+          fn.apply(this, arguments);
+        }, wait);
+      }
+
+    }
+    function add() {
+      console.log(1);
+    }
+    btn.addEventListener('click', debounce(add, 2000));
+
+  </script> -->
+
+  <!-- 节流
+高频事件触发，但在n秒内只会执行一次，所以节流会稀释函数的执行频率 -->
+  <button id="btn">
+    +
+  </button>
+  <script>
+    let btn = document.getElementById('btn');
+    function throttle(fn, wait) {
+      let canRun = true; // 通过闭包保存一个标记
+      return function () {
+        if (!canRun) return; // 在函数开头判断标记是否为true，不为true则return
+        canRun = false; // 立即设置为false
+        setTimeout(() => { // 将外部传入的函数的执行放在setTimeout中
+          fn.apply(this, arguments);
+          // 最后在setTimeout执行完毕后再把标记设置为true(关键)表示可以执行下一次循环了。当定时器没有执行的时候标记永远是false，在开头被return掉
+          canRun = true;
+        }, wait);
+      };
+    }
+    function add() {
+      console.log('1');
+    }
+    btn.addEventListener('click', throttle(add, 5000));
+  </script>
+
+
+
+
+  <!-- 都是在指定时间内执行一次,但是防抖是最后点击过指定的时间再执行,节流是第一次点击后过指定的时间再执行,最直观的感受就是点很多次,节流比防抖先执行
+    
+  -->
+
+</body>
+
+</html>

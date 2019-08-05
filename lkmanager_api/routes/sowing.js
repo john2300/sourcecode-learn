@@ -11,7 +11,9 @@ const router = express.Router({});
  */
 router.post('/sowing/api/add', (req, res, next) => {
     const form = new formidable.IncomingForm();
+    // 设置上传文件存放的文件夹，默认为系统的临时文件夹，可以使用fs.rename()来改变上传文件的存放位置和文件名
     form.uploadDir = config.upload_path;
+    //设置该属性为true可以使得上传的文件保持原来的文件的扩展名。
     form.keepExtensions = true;
     form.parse(req, (err, fields, files) => {
         if (err) {
@@ -103,6 +105,7 @@ router.post('/sowing/api/edit', (req, res, next) => {
         console.log(body);
         // 1.1 根据id查询数据
         Sowing.findById(body.id, (err, sowing) => {
+            console.log('findById');
             if (err) {
                 return next(err);
             }
@@ -113,6 +116,7 @@ router.post('/sowing/api/edit', (req, res, next) => {
 
             // 1.2. 取出要修改的数据
             sowing.image_title = body.image_title;
+            //上传的文件image_url,需要basename解析(变化的情况下)
             sowing.image_url = body.image_url || basename(files.image_url.path);
             sowing.image_small_url = body.image_small_url || basename(files.image_small_url.path);
             sowing.image_link = body.image_link;
@@ -143,6 +147,7 @@ router.post('/sowing/api/edit', (req, res, next) => {
 /**
  * 根据id删除一条记录
  */
+//前端传过来的时候没有加冒号啊,自动加的?
 router.get('/sowing/api/remove/:sowingId', (req, res, next) => {
     Sowing.remove({_id: req.params.sowingId}, (err, result) => {
         if (err) {

@@ -1,65 +1,179 @@
 import React, { Component } from 'react';
-//React-Redux 提供<Provider/>组件，能够使你的整个app访问到Redux store中的数据
-import { Provider } from 'react-redux';
-import {connect} from "react-redux";
-import store from './Store/';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
-
-import Header from './Components/Header';
-import Aside from './Components/Aside';
-import routes from './Router';
+import { connect } from "react-redux";
+import { BrowserRouter as Router, Route, Link,Switch,Redirect } from 'react-router-dom'
 import * as constants from "./Store/actionTypes";
+
+
+// import Aside from './Components/Aside/Aside';
+// import routes from './Router';
+// import * as constants from "./Store/actionTypes";
+import Home from './Pages/Home/Home'
+import SowingRouter from './Pages/Sowing/router'
+import CourseRouter from './Pages/Course/router'
+import LayOut from './Components/LayOut'
+import Login from './Pages/Mine/Login'
+import ErrorPage from './Pages/ErrorPage'
+import User from './Pages/User/User'
+import MineRouter from './Pages/Mine/router'
+
+
+
+
+
+
 class App extends Component {
+  componentWillMount() {
+      this.props.reqLocalData();
+  }
+
   render() {
-    return (
-      <Provider store={store}>
-        <Router>
-          <Header />
-          <div className='main'>
-            <Aside />
-            {
-              routes.map((route,index)=>{
-                if(route.exact){
-                  return (
-                    <Route path={route.path} key={index} exact render={props=>(<route.component {...props}/>)}/>
-                  );
-                }else{
-                  return (
-                    <Route path={route.path} key={index} render={props=>(<route.component {...props}/>)}/>
-                  );
-                }
-              })
-            }
-          </div>
-        </Router>
-      </Provider>
-    );
+      // 主面板
+      let LayOutRouter = (
+          <LayOut>
+              <Switch>
+                  <Route exact path="/" component={Home}/>
+                  <Route path="/user" component={User}/>
+                  <Route path="/mine" component={MineRouter}/>
+                  <Route path="/sowing" component={SowingRouter}/>
+                  <Route path="/course" component={CourseRouter}/>
+                  {/* 路径没有匹配到的时候显示 */}
+                  <Route component={ErrorPage}/>
+              </Switch>
+          </LayOut>
+      );
+      return (
+          <Router>
+              <Switch>
+                  <Route
+                      exact
+                      path="/"
+                      render={
+                          this.props.userData ?
+                              (props)=> LayOutRouter :
+                              ()=> <Redirect to="/login"  push/>
+                      }
+                      //加上push参数会调用history.pushState， <Redirect push to={{...} /> 此时浏览器将url加入到浏览历史中，浏览器后退键有效
+                      //刚开始进来/先匹配到,判断去/login页面,没问题
+                      //判断有则渲染
+                  />
+                  <Route path="/login" component={Login}/>
+                      {/* 这里是不是匹配了两次了? */}
+                  <Route path="/" render={props => LayOutRouter}/>
+              </Switch>
+          </Router>
+      );
   }
 }
 
 const mapDispatchToProps = (dispatch)=>{
-  return {
-      reqLocalData(){
-          const userData = JSON.parse(sessionStorage.getItem('userData'));
-          dispatch({
-              type: constants.INIT_USER_DATA,
-              userData
-          });
-      }
-  }
+return {
+    reqLocalData(){
+      //sessionStorage是全局的
+        const userData = JSON.parse(sessionStorage.getItem('userData'));
+        dispatch({
+            type: constants.INIT_USER_DATA,
+            userData
+        });
+    }
+}
 };
 
 const mapStateToProps = (state)=>{
-    return {
-        userData: state.userData
-    }
+  return {
+      userData: state.userData
+  }
 };
-//mapStateToProps获取状态,mapDispatchToProps派发行为
+
+//mapStateToProps获取状态,
 export default connect(mapStateToProps, mapDispatchToProps)(App);
 
 
+// class App extends Component {
+//   // componentWillMount() {
+//   //   this.props.reqLocalData();
+//   // }
+//   render() {
+//     return (
+//       // <div>
+//       <Router>
+//         <Header />
+//         <div className='main'>
+//           <Aside />
+//           {/* {
+//             routes.map((route, index) => {
+//               if (route.exact) {
+//                 return (
+//                   <Route path={route.path} key={index} exact render={props => (<route.component {...props} />)} />
+//                 );
+//               } else {
+//                 return (
+//                   <Route path={route.path} key={index} render={props => (<route.component {...props} />)} />
+//                 );
+//               }
+//             })
+//           } */}
+
+//           <Route exact path="/" component={Home} />
+//           {/* <Route path="/user" component={User} /> */}
+//           {/* <Route path="/mine" component={MineRouter} /> */}
+//           <Route path="/sowing" component={SowingRouter} />
+//           <Route path="/course" component={CourseRouter} />
+//         </div>
+//       </Router>
+//       // </div>
+//     );
+//   }
+// }
+
+// const mapDispatchToProps = (dispatch) => {
+//   return {
+//     reqLocalData() {
+//       const userData = JSON.parse(sessionStorage.getItem('userData'));
+//       dispatch({
+//         type: constants.INIT_USER_DATA,
+//         userData
+//       });
+//     }
+//   }
+// };
+
+// const mapStateToProps = (state) => {
+//   return {
+//     userData: state.userData
+//   }
+// };
+// //mapStateToProps获取状态,mapDispatchToProps派发行为
+// // export default connect(mapStateToProps, mapDispatchToProps)(App);
+// export default App;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /**
- * 
+ *
  * React-Redux提供一个connect方法使你可以从Redux store中读取数据（以及当store更新后，重新读取数据）
 
 connect方法接收两个参数，都是可选参数：

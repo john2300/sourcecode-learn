@@ -1,5 +1,9 @@
 import mongoose from 'mongoose';
-mongoose.connect('mongodb://localhost/lk_data');
+mongoose.connect('mongodb://47.104.7.40:27017/lk_data', { useNewUrlParser: true },(err,res)=>{
+    if(!err){
+        console.log(res)
+    }
+});
 
 const homeSchema = mongoose.Schema({
     // 登录用户数
