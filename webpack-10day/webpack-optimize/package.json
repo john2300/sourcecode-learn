@@ -29,7 +29,7 @@
     "bootstrap": "^4.3.1",
     "express": "^4.16.4",
     "jquery": "^3.3.1",
-    "moment": "^2.24.0",
+    "moment": "^2.29.2",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
     "tapable": "^1.1.1"
